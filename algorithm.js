@@ -1,18 +1,17 @@
 var inputArray = [1, [2], [3, [[4]]]];
 var newArray = [];
 
-
 var arrayCheck = function (item) {
-    if (item.length === undefined) {
-        newArray.push(item);
+    if (Array.isArray(item)) {
+        item.forEach(function(element) {
+            arrayCheck(element);
+        });
     } else {
-        for (var i=0; i < item.length; i++) {
-            arrayCheck(item[i]);
-        }
+        newArray.push(item);
     }
+    return newArray;
 };
 
-arrayCheck(inputArray);
-console.log(newArray);
+console.log(arrayCheck(inputArray));
 
 
